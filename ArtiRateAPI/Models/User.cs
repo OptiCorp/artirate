@@ -9,8 +9,6 @@ public partial class User
 
     public string Username { get; set; } = null!;
 
-    public string Password { get; set; } = null!;
-
     public string Role { get; set; } = null!;
 
     public virtual ICollection<Rating> Ratings { get; } = new List<Rating>();

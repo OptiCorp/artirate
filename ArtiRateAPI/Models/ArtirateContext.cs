@@ -108,10 +108,6 @@ public partial class ArtirateContext : DbContext
             entity.Property(e => e.UserId)
                 .ValueGeneratedNever()
                 .HasColumnName("userId");
-            entity.Property(e => e.Password)
-                .HasMaxLength(45)
-                .IsUnicode(false)
-                .HasColumnName("password");
             entity.Property(e => e.Role)
                 .HasMaxLength(12)
                 .IsUnicode(false)

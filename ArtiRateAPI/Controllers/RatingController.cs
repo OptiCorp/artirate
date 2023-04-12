@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ArtiRateAPI.Models;
@@ -52,6 +53,7 @@ namespace ArtiRateAPI.Controllers
         // PUT: api/Rating/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> PutRating(int id, Rating rating)
         {
             if (id != rating.RatingValue)
@@ -83,6 +85,7 @@ namespace ArtiRateAPI.Controllers
         // POST: api/Rating
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Rating>> PostRating(Rating rating)
         {
           if (_context.Ratings == null)
@@ -111,6 +114,7 @@ namespace ArtiRateAPI.Controllers
 
         // DELETE: api/Rating/5
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteRating(int id)
         {
             if (_context.Ratings == null)

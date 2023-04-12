@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ArtiRateAPI.Models;
@@ -52,6 +53,7 @@ namespace ArtiRateAPI.Controllers
         // PUT: api/Generator/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> PutGenerator(int id, Generator generator)
         {
             if (id != generator.GeneratorId)
@@ -83,6 +85,7 @@ namespace ArtiRateAPI.Controllers
         // POST: api/Generator
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Generator>> PostGenerator(Generator generator)
         {
           if (_context.Generators == null)
@@ -111,6 +114,7 @@ namespace ArtiRateAPI.Controllers
 
         // DELETE: api/Generator/5
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteGenerator(int id)
         {
             if (_context.Generators == null)

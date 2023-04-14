@@ -5,7 +5,7 @@ namespace ArtiRateAPI.Models;
 
 public partial class User
 {
-    public int UserId { get; set; }
+    public string UserId { get; set; } = null!;
 
     public string Username { get; set; } = null!;
 

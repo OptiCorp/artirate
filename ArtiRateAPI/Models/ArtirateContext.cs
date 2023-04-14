@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ArtiRateAPI.Models;
 
-
 public partial class ArtirateContext : DbContext
 {
     public ArtirateContext()
@@ -25,8 +24,8 @@ public partial class ArtirateContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=artirate;Trusted_Connection=True;TrustServerCertificate=True;");
-
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -89,7 +88,10 @@ public partial class ArtirateContext : DbContext
                 .ValueGeneratedNever()
                 .HasColumnName("ratingValue");
             entity.Property(e => e.ImgId).HasColumnName("imgId");
-            entity.Property(e => e.UserId).HasColumnName("userId");
+            entity.Property(e => e.UserId)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("userId");
 
             entity.HasOne(d => d.Img).WithMany(p => p.Ratings)
                 .HasForeignKey(d => d.ImgId)
@@ -107,7 +109,8 @@ public partial class ArtirateContext : DbContext
             entity.ToTable("users");
 
             entity.Property(e => e.UserId)
-                .ValueGeneratedNever()
+                .HasMaxLength(50)
+                .IsUnicode(false)
                 .HasColumnName("userId");
             entity.Property(e => e.Role)
                 .HasMaxLength(12)

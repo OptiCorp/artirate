@@ -1,70 +1,48 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router} from 'react-router-dom';
-import {Routes, Route} from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./services/AuthProvider.js";
 
-import { getFirestore, addDoc, collection } from "firebase/firestore";
-import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
-const db = getFirestore();
-const Auth = getAuth();
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+import GetAllUsers from './services/userServices';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { query, collection, getDocs, where } from "firebase/firestore";
+import { auth, db } from './constants/firebase.js'
+
+import Signup from "./components/login/Signup.jsx";
+import Login from "./components/login/Login.jsx";
+import TopNav from './components/base/TopNav.jsx';
+import Profile from "./routes/Profile.jsx";
 
 
-const signUpUser = async (email:string, password:string) => {
-  try {
-    const userCredential = await createUserWithEmailAndPassword(
-      Auth,
-      email,
-      password
-    );
-    const user = userCredential.user;
-    await addDoc(collection(db, "users"), {
-      uid: user.uid,
-      email: user.email,
-    });
-    return true
-  } catch (error: any){
-    return {error: error.message}
-  }
-};
-
-const signInUser = async (email: string, password: string) => {
-  try {
-    const userCredential = await signInWithEmailAndPassword(
-      Auth,
-      email,
-      password
-    );
-    const user = userCredential.user;
-    return true
-  } catch (error: any) {
-    return {error: error.message}
-  }
-};
-
-const signOutUser = async() => {
-  try {
-    await signOut(Auth)
-    return true
-  } catch (error) {
-    return false
-  }
-};
 
 function App() {
+
+  GetAllUsers();
+  const [user, loading, error] = useAuthState(auth);  
+  const [username, setUsername] = useState("");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <h3>AritRate</h3>
-      </header>
-      <Router>
-        <div>
-          <Routes>
-            <Route path="./signup"> Signup</Route>
-            <Route path="./login"> Login</Route>
-          </Routes>
-        </div>
-      </Router>
+    <>
+    <TopNav />
+    <div className="App-header">
+    <Container>
+      <Row>
+        <Col>
+          <Signup />
+        </Col>
+        <Col></Col>
+        <Col><Login /></Col>
+      </Row>
+    </Container>
     </div>
+    </>
   );
 }
 

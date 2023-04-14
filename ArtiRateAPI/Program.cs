@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using  Microsoft.IdentityModel.Tokens;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.Configuration;
 using ArtiRateAPI.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+var connectionString = builder.Configuration["Db:ConnectionString"];
+var JwtIssuer = builder.Configuration["Jwt:Issuer"];
+
 builder.Services.AddDbContext<ArtirateContext>(options =>
 {
 	options.UseSqlServer(builder.Configuration.GetConnectionString("ArtiRateConnection"));
@@ -18,10 +22,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(opt =>
     {
         opt.IncludeErrorDetails = true;
-        opt.Authority = "https://securetoken.google.com/artirate-48d23";
+        opt.Authority = JwtIssuer;
         opt.TokenValidationParameters = new TokenValidationParameters {
             ValidateIssuer = true,
-            ValidIssuer = "https://securetoken.google.com/artirate-48d23",
+            ValidIssuer = JwtIssuer,
             ValidateAudience = true,
             ValidAudience = "artirate-48d23",
             ValidateLifetime = true

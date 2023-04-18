@@ -18,7 +18,8 @@ import { auth, db } from './constants/firebase.js'
 import Signup from "./components/login/Signup.jsx";
 import Login from "./components/login/Login.jsx";
 import TopNav from './components/base/TopNav.jsx';
-import Profile from "./routes/Profile.jsx";
+import Profile from "./routes/ProfilePage.jsx";
+import Home from './routes/Home';
 
 
 
@@ -33,13 +34,10 @@ function App() {
     <TopNav />
     <div className="App-header">
     <Container>
-      <Row>
-        <Col>
-          <Signup />
-        </Col>
-        <Col></Col>
-        <Col><Login /></Col>
-      </Row>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="profile" element={<Profile />} />
+        </Routes>
     </Container>
     </div>
     </>

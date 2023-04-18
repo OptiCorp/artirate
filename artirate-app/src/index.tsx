@@ -8,7 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./services/AuthProvider.js";
 
 import Login from "./components/login/Login.jsx";
-import Profile from "./routes/Profile.jsx";
+import Profile from "./routes/ProfilePage.jsx";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,11 +17,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
     <AuthProvider>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="login" element={<Login />} />
-        <Route path="profile" element={<Profile />} />
-        </Routes>
+      <App />
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>

@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import AuthContext from "../../services/AuthContext.js";
-import { logOut } from "../../services/loginServices.js";
 
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -20,25 +19,23 @@ function TopNav(props) {
     <Navbar bg="dark" variant="dark">
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>ArtiRate</Navbar.Brand>
+            <Navbar.Brand><h1>ArtiRate</h1></Navbar.Brand>
           </LinkContainer>
-          <Nav className="me-auto justify-content-end flex-grow-1">
+          <Nav className="me-auto justify-content-end flex-grow-1 align-items-center">
             <LinkContainer to="/upload">
               <Nav.Link>
-                <Button className="mt-auto mb-auto"variant="outline-light">Upload</Button>
+                <Button variant="outline-light">Upload</Button>
               </Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/profile">
               {!user ? (
-                <>
+                <LinkContainer to="/profile">
                   <Nav.Link>LogIn</Nav.Link>
-                </>
+                  </LinkContainer>
               ):(
-                <>
-                <Nav.Link><i class="bi bi-person-circle profile-img"></i></Nav.Link>
-                </>
+                <LinkContainer to="/profile">
+                <Nav.Link><i className="bi bi-person-circle profile-img text-light"></i></Nav.Link>
+                </LinkContainer>
               )}
-            </LinkContainer>
           </Nav>
         </Container>
       </Navbar>

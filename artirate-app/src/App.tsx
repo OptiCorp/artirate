@@ -11,7 +11,8 @@ import { auth } from './constants/firebase.js'
 
 import TopNav from './components/base/TopNav.jsx';
 import Home from './routes/Home';
-import ProfilePage from './routes/ProfilePage.jsx';
+import ProfilePage from './routes/ProfilePage';
+import UploadPage from './routes/UploadPage';
 
 
 
@@ -23,10 +24,11 @@ function App() {
     <>
     <TopNav />
     <div className="App-header">
-    <Container>
+    <Container className="pt-5">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/upload" element={<UploadPage />} />
         </Routes>
     </Container>
     </div>

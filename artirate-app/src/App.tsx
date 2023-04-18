@@ -6,7 +6,6 @@ import { Routes, Route } from "react-router-dom";
 
 import Container from 'react-bootstrap/Container';
 
-import GetAllUsers from './services/userServices';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './constants/firebase.js'
 
@@ -17,8 +16,6 @@ import ProfilePage from './routes/ProfilePage.jsx';
 
 
 function App() {
-
-  GetAllUsers();
   const [user, loading, error] = useAuthState(auth);  
   const [username, setUsername] = useState("");
 

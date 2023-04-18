@@ -1,21 +1,27 @@
 import { useContext } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
 import AuthContext from "../services/AuthContext.js";
 import { logOut } from "../services/loginServices.js";
+import  Login  from "../components/login/Login.jsx"
 
-const Profile = () => {
+import Button from 'react-bootstrap/Button';
+
+const ProfilePage = () => {
     const { user } = useContext(AuthContext);
-    const navigate = useNavigate();
-
-    if (!user) {
-        return <Navigate replace to="/login" />;
-    }
+    
     return (
     <>
-    <h1>Profile</h1>
-    <button onClick={logOut}>Logout</button>
+    {!user ? (
+                <>
+                  <div><Login /></div>
+                </>
+              ):(
+                <>
+                <h1>Profile</h1>
+                <Button onClick={logOut}>Logout</Button>
+                </>
+              )}
     </>
     );
 };
 
-export default Profile;
+export default ProfilePage;

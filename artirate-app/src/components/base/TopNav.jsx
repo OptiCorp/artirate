@@ -9,6 +9,8 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import {LinkContainer} from 'react-router-bootstrap'
 
+import "bootstrap-icons/font/bootstrap-icons.css";
+
 function TopNav(props) {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -18,11 +20,13 @@ function TopNav(props) {
     <Navbar bg="dark" variant="dark">
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>Navbar</Navbar.Brand>
+            <Navbar.Brand>ArtiRate</Navbar.Brand>
           </LinkContainer>
-          <Nav className="me-auto">
+          <Nav className="me-auto justify-content-end flex-grow-1">
             <LinkContainer to="/upload">
-              <Nav.Link><Button variant="outline-light">Upload</Button>{' '}</Nav.Link>
+              <Nav.Link>
+                <Button className="mt-auto mb-auto"variant="outline-light">Upload</Button>
+              </Nav.Link>
             </LinkContainer>
             <LinkContainer to="/profile">
               {!user ? (
@@ -31,8 +35,7 @@ function TopNav(props) {
                 </>
               ):(
                 <>
-                <Nav.Link>Username</Nav.Link>
-                <Nav.Link onClick={logOut}>Logout</Nav.Link>
+                <Nav.Link><i class="bi bi-person-circle profile-img"></i></Nav.Link>
                 </>
               )}
             </LinkContainer>

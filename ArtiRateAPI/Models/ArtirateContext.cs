@@ -72,10 +72,15 @@ public partial class ArtirateContext : DbContext
                 .HasMaxLength(500)
                 .IsUnicode(false)
                 .HasColumnName("imgUrl");
+            entity.Property(e => e.UserId).HasColumnName("userId");
 
             entity.HasOne(d => d.Generator).WithMany(p => p.Images)
                 .HasForeignKey(d => d.GeneratorId)
                 .HasConstraintName("FK_images_generators");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Images)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK_images_users");
         });
 
         modelBuilder.Entity<Rating>(entity =>

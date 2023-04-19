@@ -15,9 +15,17 @@
 
 .App-header {
   background-color: #282c34;
+  display: flex;
   min-height: 100vh;
   flex-direction: column;
   color: white;
+  margin-top: -81.989px;
+}
+
+.App-content {
+  margin-top: 100px;
+  height: 100%;
+  flex: auto;
 }
 
 .App-link {
@@ -39,15 +47,45 @@
 .signup-btn {
   filter: brightness(75%);
 }
+
 .signup-btn:hover {
   cursor: pointer;
   filter: brightness(100%);
 }
+
+.browse-card-img {
+object-fit: cover;
+}
+
+.browse-img {
+  object-fit: cover;
+  height: 100%;
+  }
+
+.images-container {
+  height: 100%;
+  min-height: 83vh;
+  position: relative;
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 575px) {
+  .browse-card {
+    height: 20vh;
+  }
+  .browse-layover {
+    backdrop-filter: brightness(50%);
+  }
+  .hide {
+    display: none;
   }
 }

@@ -90,21 +90,7 @@ namespace ArtiRateAPI.Controllers
               return Problem("Entity set 'ArtirateContext.Images'  is null.");
           }
             _context.Images.Add(image);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (ImageExists(image.ImgId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetImage", new { id = image.ImgId }, image);
         }

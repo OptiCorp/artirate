@@ -52,9 +52,7 @@ public partial class ArtirateContext : DbContext
 
             entity.ToTable("images");
 
-            entity.Property(e => e.ImgId)
-                .ValueGeneratedNever()
-                .HasColumnName("imgId");
+            entity.Property(e => e.ImgId).HasColumnName("imgId");
             entity.Property(e => e.GeneratorId).HasColumnName("generatorId");
             entity.Property(e => e.ImgDescription)
                 .HasMaxLength(1200)

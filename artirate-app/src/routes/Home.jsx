@@ -9,7 +9,6 @@ import Login from "../components/login/Login.jsx";
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Card from 'react-bootstrap/Card';
 
 
 const Home = () => {
@@ -20,7 +19,7 @@ const Home = () => {
   React.useEffect(() => {
     axios.get(API_ImgUrl).then((response) => {
       setImages(response.data);
-      //console.log(response.data)
+      console.log(response.data);
     });
   }, []);
 
@@ -31,11 +30,19 @@ const Home = () => {
   const currentPageData = images
     .slice(offset, offset + PER_PAGE);
   const pageCount = Math.ceil(images.length / PER_PAGE);
-  //console.log(currentPageData);
+ 
 
   function handlePageClick({ selected: selectedPage }) {
     setCurrentPage(selectedPage);
-}
+  }
+
+  const toggleClassName = (index) => {
+    const getElement = "#" + index;
+    document.querySelector(getElement).classList.toggle("hide");
+  }
+  
+
+  
 
     if (!user) {
         return <>
@@ -49,19 +56,25 @@ const Home = () => {
         <h4 className="text-center">BROWSE</h4>
         </Col>
     </Row>
-    <Row>
-    {currentPageData.map(({imgId, imgTitle, imgPrompt}) => (
+    <Row className="images-container">
+    {currentPageData.map(({imgId, imgTitle, imgPrompt, imgUrl, imgGenerator, imgDescription}) => (
+      
         <Col sm={4} key={imgId} className="pt-3">
-          <Card>
-            <Card.Img variant="top" src="" />
-            <Card.Body>
-              <Card.Title className="text-secondary">{imgTitle}</Card.Title>
-              <Card.Text className="text-dark">{imgPrompt}</Card.Text>
-              </Card.Body>
-              </Card>
+        <div className="browse-card card bg-dark text-white" onMouseEnter={(e) => {
+                  toggleClassName(imgTitle);
+                 }}
+                 onMouseLeave={e => {
+                  toggleClassName(imgTitle);
+                 }}>
+            <img className="browse-img card-img" src={imgUrl} alt={imgDescription} />
+            <div className="card-img-overlay browse-layover hide" id={imgTitle}>
+              <h5 className="card-title">{imgTitle}</h5>
+              <p className="card-text">Generated with:</p>
+            </div>
+          </div>
         </Col>
     ))}
-        <Col xs={12} className="mt-3 d-flex justify-content-end">
+        <Col xs={12} className="mt-3 d-flex justify-content-end  align-self-end">
         <ReactPaginate
         previousLabel={"Previous"}
         nextLabel={"Next →"}

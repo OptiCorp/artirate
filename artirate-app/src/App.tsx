@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 import {  useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
@@ -27,7 +27,7 @@ function App() {
     <>
     <TopNav />
     <div className="App-header">
-    <Container className="pt-5">
+    <Container className="App-content pt-5">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<ProfilePage />} />

@@ -1,12 +1,19 @@
 import React from "react";
 import axios from "axios";
 import { API_ImgUrl } from "../constants/api.js";
+import { GetGeneratorById } from "./generatorServices.js";
 
 
 export function GetAllImages() {
   React.useEffect(() => {
     axios.get(API_ImgUrl).then((response) => {
-      return response.data
+      response.data.forEach(element => {
+        const generator = GetGeneratorById(element.generatorId);
+        element.generator = generator.generatorName;
+        console.log(element);
+      });
+      console.log(response.data);
+      return response.data;
     });
   }, []);
 }
@@ -16,7 +23,6 @@ export async function PostImage(url, inputs, user) {
   console.log(inputs.prompt)
   console.log(user);
   const genId = parseInt(inputs.generator);
-  
   
   
   await fetch(API_ImgUrl, {

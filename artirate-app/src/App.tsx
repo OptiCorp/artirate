@@ -13,12 +13,15 @@ import TopNav from './components/base/TopNav.jsx';
 import Home from './routes/Home';
 import ProfilePage from './routes/ProfilePage';
 import UploadPage from './routes/UploadPage';
+import GetAllUsers from './services/userServices';
 
 
 
 function App() {
   const [user, loading, error] = useAuthState(auth);  
   const [username, setUsername] = useState("");
+
+  GetAllUsers();
 
   return (
     <>

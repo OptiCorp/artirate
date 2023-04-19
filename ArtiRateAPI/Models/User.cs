@@ -5,11 +5,11 @@ namespace ArtiRateAPI.Models;
 
 public partial class User
 {
-    public string UserId { get; set; } = null!;
+    public int UserId { get; set; }
 
     public string Username { get; set; } = null!;
 
     public string Role { get; set; } = null!;
 
-    public virtual ICollection<Rating> Ratings { get; } = new List<Rating>();
+    public string FirebaseLink { get; set; } = null!;
 }

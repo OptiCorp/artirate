@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { API_UserUrl } from "../constants/api.js"
+import { API_UserUrl } from "../constants/api.js";
 
 
 //Get All
@@ -18,14 +18,13 @@ export function GetAllUsers() {
    }, []);
 };
 
-export async function PostUser(userid, username, token) {
-    console.log(userid);
+export async function PostUser(firebaseId, username, token) {
     await fetch(API_UserUrl, {
     method: 'POST',
     body: JSON.stringify({
-       userId: userid,
-       userName: username,
-       role: "User",
+      FirebaseLink: firebaseId,
+      userName: username,
+      role: "User",
     }),
     headers: {
        'Content-type': 'application/json; charset=UTF-8',

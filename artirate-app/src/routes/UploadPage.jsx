@@ -6,6 +6,8 @@ import Col from 'react-bootstrap/Col';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import { uploadToCloud } from "../services/uploadServices.js";
+import { PostImage } from "../services/imageServices.js";
 
 const schema = Yup.object().shape({
     upload: Yup.mixed()
@@ -13,16 +15,13 @@ const schema = Yup.object().shape({
       // return file && file.size <-- u can use this if you don't want to allow empty files to be uploaded;
         if (file) return true;
         return false;
-    })
-    .test("fileSize", "The file is too large", (file) => {
-        //if u want to allow only certain file sizes
-        return file && file.size <= 2000000;
     }),
-    description: Yup.string()
-        .min(6, 'Description must be at least 6 characters'),
     prompt: Yup.string()
         .required('Prompt is required')
-        .min(6, 'Prompt must be at least 6 characters')
+        .min(6, 'Prompt must be at least 6 characters'),
+    title: Yup.string()
+        .required('Title is required')
+        .min(3, 'Title must be at least 3 characters')
 });
 
 
@@ -33,11 +32,7 @@ const UploadPage = () => {
         resolver: yupResolver(schema)
       });
 
-    const onSubmit = data => submitFunction(data);
-
-    const submitFunction = (data) => {
-        console.log(data);
-    }
+    const onSubmit = data => uploadImage(data);
 
     const clearForm = () => {
         const form = document.getElementById("upload-form");
@@ -46,6 +41,14 @@ const UploadPage = () => {
         }
     }
 
+    const uploadImage = (data) => { 
+        const file = document.querySelector("#upload").files[0];
+        uploadToCloud(file).then((imgUrl)=> {
+           console.log(data);
+           console.log(imgUrl);
+           PostImage(imgUrl, data, user)
+        });
+     } 
 
     
     if (!user) {
@@ -62,11 +65,24 @@ const UploadPage = () => {
         <Col>
           <form id="upload-form" className="w-100" onSubmit={handleSubmit(onSubmit)}>
             <div className="upload-box w-100 mb-2">
+               <input className="form-control" type="file" id="upload" {...register("upload") }/>
+               <p>{errors.upload?.message}</p>
             </div>
+            <label className="form-label">Title</label>
+            <input type="text" className="form-control" {...register("title")} />
+            <p>{errors.title?.message}</p>
+            <input type="hidden" className="form-control" value="No description" {...register("description")} />
+            <p>{errors.description?.message}</p>
+            <label className="form-label">Generator</label>
+            <select type="text" className="form-select" {...register("generator")} >
+                <option value="1"> Option 1</option>
+                <option value="2"> Option 2</option>
+                <option value="3"> Option 3</option>
+            </select>
+            <p>{errors.generator?.message}</p>
             <label className="form-label">Prompt</label>
-            <input type="text" className="form-control" />
-            <label className="form-label">Description</label>
-            <input type="text" className="form-control" />
+            <textarea type="text" className="form-control" {...register("prompt")} rows="3"></textarea>
+            <p>{errors.prompt?.message}</p>
           </form>
         </Col>
         <Col xs={12}>

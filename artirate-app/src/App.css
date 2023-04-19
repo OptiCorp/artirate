@@ -36,6 +36,13 @@
   width: 50vw;
 }
 
+.signup-btn {
+  filter: brightness(75%);
+}
+.signup-btn:hover {
+  cursor: pointer;
+  filter: brightness(100%);
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

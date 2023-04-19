@@ -33,7 +33,7 @@ namespace ArtiRateAPI.Controllers
 
         // GET: api/User/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(string id)
+        public async Task<ActionResult<User>> GetUser(int id)
         {
           if (_context.Users == null)
           {
@@ -52,7 +52,7 @@ namespace ArtiRateAPI.Controllers
         // PUT: api/User/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(string id, User user)
+        public async Task<IActionResult> PutUser(int id, User user)
         {
             if (id != user.UserId)
             {
@@ -90,28 +90,14 @@ namespace ArtiRateAPI.Controllers
               return Problem("Entity set 'ArtirateContext.Users'  is null.");
           }
             _context.Users.Add(user);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (UserExists(user.UserId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetUser", new { id = user.UserId }, user);
         }
 
         // DELETE: api/User/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(string id)
+        public async Task<IActionResult> DeleteUser(int id)
         {
             if (_context.Users == null)
             {
@@ -129,7 +115,7 @@ namespace ArtiRateAPI.Controllers
             return NoContent();
         }
 
-        private bool UserExists(string id)
+        private bool UserExists(int id)
         {
             return (_context.Users?.Any(e => e.UserId == id)).GetValueOrDefault();
         }

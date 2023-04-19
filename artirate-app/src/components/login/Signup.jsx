@@ -71,11 +71,11 @@ export function Signup() {
         <p>{errors.username?.message}</p>
 
         <label className="label">Password</label>
-        <input className="form-control" {...register("password")} />
+        <input className="form-control"  type="password" {...register("password")} />
         <p>{errors.password?.message}</p>
  
         <label className="label">Repeat Password</label>
-        <input className="form-control" {...register("confirmPassword")} />
+        <input className="form-control"  type="password" {...register("confirmPassword")} />
         <p>{errors.confirmPassword?.message}</p>
       
         <div className="d-grid gap-2 d-md-flex justify-content-md-end">

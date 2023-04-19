@@ -18,6 +18,4 @@ public partial class Image
     public int? GeneratorId { get; set; }
 
     public virtual Generator? Generator { get; set; }
-
-    public virtual ICollection<Rating> Ratings { get; } = new List<Rating>();
 }

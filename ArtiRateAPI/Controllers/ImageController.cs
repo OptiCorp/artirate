@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ArtiRateAPI.Models;
@@ -53,7 +52,6 @@ namespace ArtiRateAPI.Controllers
         // PUT: api/Image/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        [Authorize]
         public async Task<IActionResult> PutImage(int id, Image image)
         {
             if (id != image.ImgId)
@@ -85,7 +83,6 @@ namespace ArtiRateAPI.Controllers
         // POST: api/Image
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        [Authorize]
         public async Task<ActionResult<Image>> PostImage(Image image)
         {
           if (_context.Images == null)
@@ -114,7 +111,6 @@ namespace ArtiRateAPI.Controllers
 
         // DELETE: api/Image/5
         [HttpDelete("{id}")]
-        [Authorize]
         public async Task<IActionResult> DeleteImage(int id)
         {
             if (_context.Images == null)

@@ -37,11 +37,11 @@ public partial class ArtirateContext : DbContext
                 .ValueGeneratedNever()
                 .HasColumnName("generatorId");
             entity.Property(e => e.GeneratorName)
-                .HasMaxLength(45)
+                .HasMaxLength(120)
                 .IsUnicode(false)
                 .HasColumnName("generatorName");
             entity.Property(e => e.GeneratorUrl)
-                .HasMaxLength(120)
+                .HasMaxLength(500)
                 .IsUnicode(false)
                 .HasColumnName("generatorUrl");
         });
@@ -57,19 +57,19 @@ public partial class ArtirateContext : DbContext
                 .HasColumnName("imgId");
             entity.Property(e => e.GeneratorId).HasColumnName("generatorId");
             entity.Property(e => e.ImgDescription)
-                .HasMaxLength(120)
+                .HasMaxLength(1200)
                 .IsUnicode(false)
                 .HasColumnName("imgDescription");
             entity.Property(e => e.ImgPrompt)
-                .HasMaxLength(200)
+                .HasMaxLength(1200)
                 .IsUnicode(false)
                 .HasColumnName("imgPrompt");
             entity.Property(e => e.ImgTitle)
-                .HasMaxLength(40)
+                .HasMaxLength(120)
                 .IsUnicode(false)
                 .HasColumnName("imgTitle");
             entity.Property(e => e.ImgUrl)
-                .HasMaxLength(120)
+                .HasMaxLength(500)
                 .IsUnicode(false)
                 .HasColumnName("imgUrl");
 
@@ -80,25 +80,20 @@ public partial class ArtirateContext : DbContext
 
         modelBuilder.Entity<Rating>(entity =>
         {
-            entity.HasKey(e => e.RatingValue);
+            entity
+                .HasNoKey()
+                .ToTable("ratings");
 
-            entity.ToTable("ratings");
-
-            entity.Property(e => e.RatingValue)
-                .ValueGeneratedNever()
-                .HasColumnName("ratingValue");
             entity.Property(e => e.ImgId).HasColumnName("imgId");
-            entity.Property(e => e.UserId)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("userId");
+            entity.Property(e => e.RatingValue).HasColumnName("ratingValue");
+            entity.Property(e => e.UserId).HasColumnName("userId");
 
-            entity.HasOne(d => d.Img).WithMany(p => p.Ratings)
+            entity.HasOne(d => d.Img).WithMany()
                 .HasForeignKey(d => d.ImgId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ratings_images");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Ratings)
+            entity.HasOne(d => d.User).WithMany()
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ratings_users");
@@ -108,12 +103,13 @@ public partial class ArtirateContext : DbContext
         {
             entity.ToTable("users");
 
-            entity.Property(e => e.UserId)
-                .HasMaxLength(50)
+            entity.Property(e => e.UserId).HasColumnName("userId");
+            entity.Property(e => e.FirebaseLink)
+                .HasMaxLength(500)
                 .IsUnicode(false)
-                .HasColumnName("userId");
+                .HasColumnName("firebase_link");
             entity.Property(e => e.Role)
-                .HasMaxLength(12)
+                .HasMaxLength(20)
                 .IsUnicode(false)
                 .HasColumnName("role");
             entity.Property(e => e.Username)

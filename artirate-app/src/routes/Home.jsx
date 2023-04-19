@@ -20,18 +20,18 @@ const Home = () => {
   React.useEffect(() => {
     axios.get(API_ImgUrl).then((response) => {
       setImages(response.data);
-      console.log(response.data)
+      //console.log(response.data)
     });
   }, []);
 
   if (!images) return null;
 
-  const PER_PAGE = 10;
+  const PER_PAGE = 12;
   const offset = currentPage * PER_PAGE;
   const currentPageData = images
     .slice(offset, offset + PER_PAGE);
   const pageCount = Math.ceil(images.length / PER_PAGE);
-  console.log(currentPageData);
+  //console.log(currentPageData);
 
   function handlePageClick({ selected: selectedPage }) {
     setCurrentPage(selectedPage);

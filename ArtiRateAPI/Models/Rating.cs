@@ -9,7 +9,7 @@ public partial class Rating
 
     public int ImgId { get; set; }
 
-    public string UserId { get; set; } = null!;
+    public int UserId { get; set; }
 
     public virtual Image? Img { get; set; } = null!;
 

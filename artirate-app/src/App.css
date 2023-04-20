@@ -68,6 +68,12 @@ object-fit: cover;
   position: relative;
 }
 
+.image-main {
+  width: 100%;
+  max-height: 80vh;
+  object-fit: cover;
+}
+
 
 @keyframes App-logo-spin {
   from {

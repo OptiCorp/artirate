@@ -54,7 +54,7 @@ namespace ArtiRateAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRating(int id, Rating rating)
         {
-            if (id != rating.RatingValue)
+            if (id != rating.Id)
             {
                 return BadRequest();
             }
@@ -90,23 +90,9 @@ namespace ArtiRateAPI.Controllers
               return Problem("Entity set 'ArtirateContext.Ratings'  is null.");
           }
             _context.Ratings.Add(rating);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (RatingExists(rating.RatingValue))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetRating", new { id = rating.RatingValue }, rating);
+            return CreatedAtAction("GetRating", new { id = rating.Id }, rating);
         }
 
         // DELETE: api/Rating/5
@@ -131,7 +117,7 @@ namespace ArtiRateAPI.Controllers
 
         private bool RatingExists(int id)
         {
-            return (_context.Ratings?.Any(e => e.RatingValue == id)).GetValueOrDefault();
+            return (_context.Ratings?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

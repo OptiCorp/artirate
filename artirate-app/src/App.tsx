@@ -9,19 +9,18 @@ import Container from 'react-bootstrap/Container';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './constants/firebase.js'
 
-import TopNav from './components/base/TopNav.jsx';
+import TopNav from './components/base/TopNav';
 import Home from './routes/Home';
 import ProfilePage from './routes/ProfilePage';
 import UploadPage from './routes/UploadPage';
-import GetAllUsers from './services/userServices';
+import ImagePage from './routes/ImagePage';
+
 
 
 
 function App() {
   const [user, loading, error] = useAuthState(auth);  
-  const [username, setUsername] = useState("");
 
-  GetAllUsers();
 
   return (
     <>
@@ -32,6 +31,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/upload" element={<UploadPage />} />
+          <Route path="/image" element={<ImagePage />} />
         </Routes>
     </Container>
     </div>

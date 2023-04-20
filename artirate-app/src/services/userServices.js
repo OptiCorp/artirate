@@ -3,20 +3,6 @@ import { API_UserUrl } from "../constants/api.js";
 
 
 //Get All
-export function GetAllUsers() {
-   const [users, setUsers] = useState([]);
-   useEffect(() => {
-      fetch(API_UserUrl)
-         .then((response) => response.json())
-         .then((data) => {
-            console.log(data);
-            setUsers(data);
-         })
-         .catch((err) => {
-            console.log(err.message);
-         });
-   }, []);
-};
 
 export async function PostUser(firebaseId, username, token) {
     await fetch(API_UserUrl, {
@@ -33,12 +19,10 @@ export async function PostUser(firebaseId, username, token) {
     })
     .then((response) => response.json())
     .then((data) => {
-       console.log(data)
+       //console.log(data)
     })
     .catch((err) => {
        console.log(err.message);
     });
 };
 
-
-export default GetAllUsers;

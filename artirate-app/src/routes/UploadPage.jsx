@@ -44,8 +44,8 @@ const UploadPage = () => {
     const uploadImage = (data) => { 
         const file = document.querySelector("#upload").files[0];
         uploadToCloud(file).then((imgUrl)=> {
-           console.log(data);
-           console.log(imgUrl);
+           //console.log(data);
+           //console.log(imgUrl);
            PostImage(imgUrl, data, user)
         });
      } 

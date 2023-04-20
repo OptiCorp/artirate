@@ -2,6 +2,9 @@ import React from "react";
 import { useState, useContext } from "react";
 import axios from "axios";
 import ReactPaginate from 'react-paginate';
+import { Link } from "react-router-dom";
+
+import { GetAllImages } from "../services/imageServices.js";
 
 import { API_ImgUrl } from "../constants/api.js";
 import AuthContext from "../services/AuthContext.js";
@@ -12,14 +15,14 @@ import Col from 'react-bootstrap/Col';
 
 
 const Home = () => {
-    const { user } = useContext(AuthContext);
-    const [currentPage, setCurrentPage] = useState(0);
-    const [images, setImages] = React.useState(null);
+  const { user } = useContext(AuthContext);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [images, setImages] = React.useState(null);
 
   React.useEffect(() => {
     axios.get(API_ImgUrl).then((response) => {
       setImages(response.data);
-      console.log(response.data);
+      //console.log(response.data);
     });
   }, []);
 
@@ -57,9 +60,10 @@ const Home = () => {
         </Col>
     </Row>
     <Row className="images-container">
-    {currentPageData.map(({imgId, imgTitle, imgPrompt, imgUrl, imgGenerator, imgDescription}) => (
+    {currentPageData.map(({imgId, imgTitle, imgPrompt, imgUrl, generatorId, imgDescription}) => (
       
         <Col sm={4} key={imgId} className="pt-3">
+          <Link to={`/image?id=${imgId}&generator=${generatorId}`}>
         <div className="browse-card card bg-dark text-white" onMouseEnter={(e) => {
                   toggleClassName(imgTitle);
                  }}
@@ -69,9 +73,9 @@ const Home = () => {
             <img className="browse-img card-img" src={imgUrl} alt={imgDescription} />
             <div className="card-img-overlay browse-layover hide" id={imgTitle}>
               <h5 className="card-title">{imgTitle}</h5>
-              <p className="card-text">Generated with:</p>
+              <p className="card-text">{imgPrompt}</p>
             </div>
-          </div>
+          </div></Link>
         </Col>
     ))}
         <Col xs={12} className="mt-3 d-flex justify-content-end  align-self-end">

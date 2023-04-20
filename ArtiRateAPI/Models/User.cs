@@ -14,4 +14,6 @@ public partial class User
     public string FirebaseLink { get; set; } = null!;
 
     public virtual ICollection<Image> Images { get; } = new List<Image>();
+
+    public virtual ICollection<Rating> Ratings { get; } = new List<Rating>();
 }

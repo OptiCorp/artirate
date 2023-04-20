@@ -83,20 +83,19 @@ public partial class ArtirateContext : DbContext
 
         modelBuilder.Entity<Rating>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("ratings");
+            entity.ToTable("ratings");
 
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.ImgId).HasColumnName("imgId");
             entity.Property(e => e.RatingValue).HasColumnName("ratingValue");
             entity.Property(e => e.UserId).HasColumnName("userId");
 
-            entity.HasOne(d => d.Img).WithMany()
+            entity.HasOne(d => d.Img).WithMany(p => p.Ratings)
                 .HasForeignKey(d => d.ImgId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ratings_images");
 
-            entity.HasOne(d => d.User).WithMany()
+            entity.HasOne(d => d.User).WithMany(p => p.Ratings)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ratings_users");

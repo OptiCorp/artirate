@@ -31,7 +31,7 @@ function Login() {
         password
       );
       const user = userCredential.user;
-      console.log(user)
+      //console.log(user)
       localStorage.setItem("token", user.accessToken);
 
       return true

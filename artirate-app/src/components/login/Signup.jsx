@@ -42,7 +42,7 @@ export function Signup() {
       );
       const user = userCredential.user;
 
-      console.log(user);
+      //console.log(user);
 
       PostUser(user.uid, username, user.accessToken);
 

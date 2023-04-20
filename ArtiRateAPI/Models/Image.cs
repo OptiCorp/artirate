@@ -21,5 +21,7 @@ public partial class Image
 
     public virtual Generator? Generator { get; set; }
 
+    public virtual ICollection<Rating> Ratings { get; } = new List<Rating>();
+
     public virtual User? User { get; set; }
 }

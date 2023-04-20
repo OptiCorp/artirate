@@ -6,6 +6,7 @@ import AuthContext from "../services/AuthContext.js";
 import { API_GeneratorUrl, API_ImgUrl } from "../constants/api.js";
 import { Row, Col } from "react-bootstrap";
 import ImageRater from "../components/image/ImageRater.jsx";
+import ImageRating from "../components/image/ImageRating.jsx";
 
 const Image = () => {
     const { user } = useContext(AuthContext);
@@ -50,22 +51,16 @@ const Image = () => {
     </Row>
     <Row>
         <Col xs={12}>
-           <div className="image-rating d-flex flex-row-reverse">
-               <i className="bi bi-star"></i>
-               <i className="bi bi-star"></i>
-               <i className="bi bi-star-half"></i>
-               <i className="bi bi-star-fill"></i>
-               <i className="bi bi-star-fill"></i>
-               <small className="pe-3">Rating:</small>
-           </div>
+           <ImageRating imgId={image.imgId}/>
         </Col>
     </Row>
     <Row>
         <Col xs={12}>
-            <ImageRater currentRating="1" imgId={image.imgId} />
+            <ImageRater currentRating="0" imgId={image.imgId} />
         </Col>
     </Row>
     </>
+    
     );
 };
 

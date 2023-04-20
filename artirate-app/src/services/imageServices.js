@@ -16,7 +16,8 @@ export async function PostImage(url, inputs, user) {
      imgTitle: inputs.title,
      imgDescription: inputs.description,
      imgPrompt: inputs.prompt,
-     generatorId: genId
+     generatorId: genId,
+     userId: 44
   }),
   headers: {
      'Content-type': 'application/json; charset=UTF-8',

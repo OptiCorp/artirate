@@ -43,9 +43,6 @@ const Home = () => {
     const getElement = "#" + index;
     document.querySelector(getElement).classList.toggle("hide");
   }
-  
-
-  
 
     if (!user) {
         return <>
@@ -65,13 +62,13 @@ const Home = () => {
         <Col sm={4} key={imgId} className="pt-3">
           <Link to={`/image?id=${imgId}&generator=${generatorId}`}>
         <div className="browse-card card bg-dark text-white" onMouseEnter={(e) => {
-                  toggleClassName(imgTitle);
+                  toggleClassName(imgTitle.replace(/\s/g, ''));
                  }}
                  onMouseLeave={e => {
-                  toggleClassName(imgTitle);
+                  toggleClassName(imgTitle.replace(/\s/g, ''));
                  }}>
             <img className="browse-img card-img" src={imgUrl} alt={imgDescription} />
-            <div className="card-img-overlay browse-layover hide" id={imgTitle}>
+            <div className="card-img-overlay browse-layover hide" id={imgTitle.replace(/\s/g, '')}>
               <h5 className="card-title">{imgTitle}</h5>
               <p className="card-text">{imgPrompt}</p>
             </div>

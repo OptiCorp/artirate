@@ -40,8 +40,7 @@
 }
 .upload-box {
   border: 2px solid rgb(49, 145, 65);
-  height: 50vh;
-  width: 50vw;
+  height: 90vw;
 }
 
 .signup-btn {

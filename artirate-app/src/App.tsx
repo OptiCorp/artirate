@@ -26,7 +26,7 @@ function App() {
     <>
     <TopNav />
     <div className="App-header">
-    <Container className="App-content pt-5">
+    <Container className="App-content pt-1">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<ProfilePage />} />

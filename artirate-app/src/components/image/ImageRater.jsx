@@ -437,11 +437,22 @@ const starContainer = () => {
   }
 }
 
+const messageContainer = () => {
+  if(rating === 0){
+    return <>
+    <div className="text-center text-primary"><small> You have'nt voted yet!</small></div>
+    </>
+  }
+}
+
   
   return (
-    <div className="image-rater image-rating d-flex justify-content-center fs-1" data-user={user.uid}>
-               { starContainer() }
-           </div>
+    <>
+      <div className="image-rater image-rating d-flex justify-content-center fs-1" data-user={user.uid}>
+        { starContainer() }
+      </div>
+      { messageContainer() } 
+    </>
   )
 }
 

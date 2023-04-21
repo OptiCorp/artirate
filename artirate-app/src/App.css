@@ -39,8 +39,21 @@
   filter: brightness(85%);
 }
 .upload-box {
-  border: 2px solid rgb(49, 145, 65);
-  height: 90vw;
+  border: 3px solid white;
+  border-radius: .375rem;
+  max-height: 400px;
+  min-height:300px;
+  position: relative;
+}
+#upload {
+  position: absolute;
+  bottom: 0px;
+}
+.upload-icon {
+  width: 150px;
+  position: absolute;
+  left: auto;
+  right: auto;
 }
 
 .signup-btn {

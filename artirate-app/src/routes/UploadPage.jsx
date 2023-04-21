@@ -8,6 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { uploadToCloud } from "../services/uploadServices.js";
 import { PostImage } from "../services/imageServices.js";
+import GeneratorOptions from "../components/upload/GeneratorOptions.jsx";
 
 const schema = Yup.object().shape({
     upload: Yup.mixed()
@@ -17,11 +18,11 @@ const schema = Yup.object().shape({
         return false;
     }),
     prompt: Yup.string()
-        .required('Prompt is required')
-        .min(6, 'Prompt must be at least 6 characters'),
+        .required('Prompt is required'),
     title: Yup.string()
-        .required('Title is required')
-        .min(3, 'Title must be at least 3 characters')
+        .required('Title is required'),
+    generator: Yup.string()
+    .required('Remember to pick a generator')
 });
 
 
@@ -62,9 +63,12 @@ const UploadPage = () => {
         </Col>
     </Row>
     <Row className="justify-content-center">
-        <Col>
+        
+        {user? (<>
+            <Col>
           <form id="upload-form" className="w-100" onSubmit={handleSubmit(onSubmit)}>
-            <div className="upload-box w-100 mb-2">
+            <div className="upload-box w-100 mb-2 d-flex justify-content-center align-items-center">
+               <img src="https://bootstrapious.com/i/snippets/sn-img-upload/image.svg" alt="" className="mb-4 upload-icon" />
                <input className="form-control" type="file" id="upload" {...register("upload") }/>
                <p>{errors.upload?.message}</p>
             </div>
@@ -75,9 +79,7 @@ const UploadPage = () => {
             <p>{errors.description?.message}</p>
             <label className="form-label">Generator</label>
             <select type="text" className="form-select" {...register("generator")} >
-                <option value="1"> Option 1</option>
-                <option value="2"> Option 2</option>
-                <option value="3"> Option 3</option>
+                <GeneratorOptions />
             </select>
             <p>{errors.generator?.message}</p>
             <label className="form-label">Prompt</label>
@@ -91,6 +93,8 @@ const UploadPage = () => {
                 <button type="submit" className="btn btn-primary ms-1" form="upload-form">Upload</button>
             </div>
         </Col>
+        </>) : (<><div>Log in or Sign Up to upload Images ;) </div>
+        </>)}
     </Row>
     </>
     );

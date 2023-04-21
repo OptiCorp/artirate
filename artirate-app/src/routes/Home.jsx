@@ -28,7 +28,7 @@ const Home = () => {
 
   if (!images) return null;
 
-  const PER_PAGE = 12;
+  const PER_PAGE = 9;
   const offset = currentPage * PER_PAGE;
   const currentPageData = images
     .slice(offset, offset + PER_PAGE);

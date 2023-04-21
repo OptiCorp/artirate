@@ -151,7 +151,6 @@ function ImageRater(props) {
         EditRating(userId, imgId, value, user, id);
         setRating(value);
       }
-      //navigate(0);
     })
     .catch((err) => {
       console.log(err.message);

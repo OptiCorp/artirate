@@ -17,6 +17,7 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [images, setImages] = React.useState(null);
 
+
   React.useEffect(() => {
     axios.get(API_ImgUrl).then((response) => {
       setImages(response.data);
@@ -35,6 +36,7 @@ const Home = () => {
 
   function handlePageClick({ selected: selectedPage }) {
     setCurrentPage(selectedPage);
+    localStorage.setItem("imagePage", selectedPage);
   }
 
   const toggleClassName = (index) => {

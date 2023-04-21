@@ -94,7 +94,6 @@ function ImageRating(props) {
                 element.onclick = (e) => {
                     setTimeout(() => {
                         fetch();
-                        console.log("now!")
                       }, "500");
                 }
             });
@@ -105,7 +104,16 @@ function ImageRating(props) {
   return (
     <>
         <div className="image-rating d-flex flex-row-reverse">
-            <div>{ratings? (<>{ getStars(ratings) }</>) : (<>No ratings yet!</>)}</div>
+            <div>{ratings? 
+            (<>{ getStars(ratings) }</>) 
+            : 
+            (<><small className="pe-2">Rating:</small>
+            <i className="bi bi-star"></i>
+            <i className="bi bi-star"></i>
+            <i className="bi bi-star"></i>
+            <i className="bi bi-star"></i>
+            <i className="bi bi-star"></i></>)}
+            </div>
         </div>
     </>
   )

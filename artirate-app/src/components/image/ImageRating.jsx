@@ -46,43 +46,40 @@ const getStars = (rating) => {
         </>
         
         default:   return <>
-        <i className="bi bi-star"></i>
-        <i className="bi bi-star"></i>
-        <i className="bi bi-star"></i>
-        <i className="bi bi-star"></i>
-        <i className="bi bi-star"></i>
         <small className="pe-2">Rating:</small>
+        <i className="bi bi-star"></i>
+        <i className="bi bi-star"></i>
+        <i className="bi bi-star"></i>
+        <i className="bi bi-star"></i>
+        <i className="bi bi-star"></i>
     </>
     }
-   
 }
+
 function ImageRating(props) {
     const [ratings, setRating] = useState([]);
+
     useEffect(() => {
         if(props.imgId){
+            const userRating = document.querySelectorAll(".ratingValue");
             const fetch = async () => {
                 try {
                     axios.get(API_RatingUrl).then((response) => {
                         let values = [];
-                        //console.log(response)
                         response.data.forEach(element => {
-                            //console.log(element)s
                             if(element.imgId === props.imgId){
-                                console.log("found!");
                                 values.push(parseInt(element.ratingValue));
                             }
                         });
-                        console.log("lenght: " + values.length);
                         if(values.length > 0){
                             if(values.length === 1){
                                 const avg = values[0];
-                                console.log(avg)
                                 setRating(avg);
                             }else {
                                 const sum = values.reduce((a, b) => a + b, 0);
-                            const avg = (sum / values.length) || 0;
-                            console.log(avg)
-                            setRating(avg);
+                                const avg = (sum / values.length) || 0;
+                                //console.log(Math.round(avg))
+                                setRating(Math.round(avg));
                             }
                         }else{
                             setRating(false);
@@ -91,10 +88,18 @@ function ImageRating(props) {
                 } catch (err) {
                   console.error(err);
                 }
-              };
-              fetch();
+            };
+            fetch();
+            userRating.forEach(element => {
+                element.onclick = (e) => {
+                    setTimeout(() => {
+                        fetch();
+                        console.log("now!")
+                      }, "500");
+                }
+            });
         }
-      }, [props.imgId]);
+      }, [props.imgId, ratings]);
 
       if(!props.imgId) return 'Getting Ratings';
   return (

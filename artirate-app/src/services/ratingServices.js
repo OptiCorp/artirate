@@ -20,7 +20,7 @@ export async function PostRating(userId, imgId, value, user) {
     })
     .then((response) => response.json())
     .then((data) => {
-       console.log(data)
+       //console.log(data)
     })
     .catch((err) => {
        console.log(err.message);
@@ -44,7 +44,7 @@ export async function EditRating(userId, imgId, value, user, ratingId) {
     })
     .then((response) => response.json())
     .then((data) => {
-       console.log(data)
+       //console.log(data)
     })
     .catch((err) => {
        console.log(err.message);
@@ -58,12 +58,10 @@ export async function RatingExists(userId, imgId){
   .then((data) => {
     data.forEach(element => {
         if(element.userId === userId && element.imgId === imgId){
-            console.log("found!");
-            console.log(element.userId);
+           // console.log(element.userId);
             return element.userId;
         }
     });
-    console.log("did not find")
   })
   .catch((err) => {
      console.log(err.message);

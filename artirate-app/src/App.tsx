@@ -1,13 +1,9 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import {  useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Container from 'react-bootstrap/Container';
-
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from './constants/firebase.js'
 
 import TopNav from './components/base/TopNav';
 import Home from './routes/Home';
@@ -19,9 +15,6 @@ import ImagePage from './routes/ImagePage';
 
 
 function App() {
-  const [user, loading, error] = useAuthState(auth);  
-
-
   return (
     <>
     <TopNav />

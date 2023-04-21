@@ -2,6 +2,8 @@ import { useState, useContext, useEffect} from "react";
 import AuthContext from "../../services/AuthContext";
 import { API_RatingUrl, API_UserUrl } from "../../constants/api";
 import { PostRating, EditRating } from "../../services/ratingServices";
+import { useNavigate } from "react-router-dom";
+
 
 const toggleRating= (e) =>{
   const stars = document.querySelectorAll(".ratingValue");
@@ -98,17 +100,18 @@ const toggleRatingOut= (currentRating) =>{
   }
 }
 
+
 function ImageRater(props) {
   const { user } = useContext(AuthContext);
-  const [rating, setRating] = useState(parseInt(props.currentRating));
+  const [rating, setRating] = useState(0);
   const [apiUser, setApiUser] = useState("");
-  const imgId = props.imgId;
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if(props.imgId){
     fetch(API_UserUrl)
        .then((response) => response.json())
        .then((data) => {
-          //console.log(data);
           if(user){
              data.forEach(element => {
                 if(element.firebaseLink === user.uid){
@@ -120,7 +123,15 @@ function ImageRater(props) {
        .catch((err) => {
           console.log(err.message);
        });
- }, []);
+    fetch(API_RatingUrl).then((response) => response.json()).then((data) => {
+      data.forEach(element => {
+        if(element.userId === apiUser && element.imgId === props.imgId){
+            setRating(element.ratingValue);
+        }
+      });
+    })}
+ }, [apiUser, props.imgId, user]);
+
 
  const rateImage = async (userId, imgId, value, user) => {
   try {
@@ -130,18 +141,17 @@ function ImageRater(props) {
       let id = false;
       data.forEach(element => {
         if(element.userId === userId && element.imgId === imgId){
-            id =element.id;
+            id = element.id;
         }
       });
       if(!id){
-        console.log("did not find");
         PostRating(userId, imgId, value, user);
         setRating(value);
       }else{
-        console.log(id + " found!");
         EditRating(userId, imgId, value, user, id);
         setRating(value);
       }
+      //navigate(0);
     })
     .catch((err) => {
       console.log(err.message);
@@ -200,7 +210,7 @@ const starContainer = () => {
      onClick={() => {
       rateImage(apiUser, props.imgId, 5, user)
      }}></i></>;
-
+     
 
     case 2: return <> <i className="ratingValue bi bi-star-fill" data-value="1" data="true" onMouseEnter={(e) => {
       toggleRating(e);
@@ -389,7 +399,8 @@ const starContainer = () => {
       rateImage(apiUser, props.imgId, 5, user)
      }}></i></>;
 
-    default:      return <><i className="ratingValue bi bi-star" data-value="1" data="true" onMouseEnter={(e) => {
+    default:      
+    return <><i className="ratingValue bi bi-star" data-value="1" data="true" onMouseEnter={(e) => {
         toggleRating(e);
        }}
        onMouseLeave={e => {
@@ -436,6 +447,7 @@ const starContainer = () => {
        }}></i></>;
   }
 }
+if(!props.imgId) return 'Getting Ratings';
 
 const messageContainer = () => {
   if(rating === 0){
@@ -445,13 +457,16 @@ const messageContainer = () => {
   }
 }
 
-  
   return (
     <>
+    {user ? (<>
       <div className="image-rater image-rating d-flex justify-content-center fs-1" data-user={user.uid}>
         { starContainer() }
       </div>
       { messageContainer() } 
+    </>): (<>
+    <div>Log in to view Details ;)</div>
+    </>)}
     </>
   )
 }

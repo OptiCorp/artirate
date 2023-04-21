@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { useState} from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { signInWithEmailAndPassword} from "firebase/auth";
 import { auth } from "../../constants/firebase.js";
 import Signup from './Signup.jsx';
+import { useNavigate } from "react-router-dom";
+
+
 
 const schema = Yup.object().shape({
   email: Yup.string()
@@ -22,6 +25,7 @@ function Login() {
     resolver: yupResolver(schema)
   });
   const onSubmit = data => logIn(data.email, data.password);
+  const navigate = useNavigate()
   
   const logIn = async (email, password) => {
     try {
@@ -33,6 +37,7 @@ function Login() {
       const user = userCredential.user;
       //console.log(user)
       localStorage.setItem("token", user.accessToken);
+      navigate("/");
 
       return true
     } catch (error) {
@@ -50,7 +55,6 @@ function Login() {
     {!togglePage ? (
       <div className="login-container">
       <h6>Sign In</h6>
-
       {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
       <form onSubmit={handleSubmit(onSubmit)}>
 

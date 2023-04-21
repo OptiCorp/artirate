@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
 import AuthContext from "../services/AuthContext.js"
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -28,7 +27,6 @@ const schema = Yup.object().shape({
 
 const UploadPage = () => {
     const { user } = useContext(AuthContext);
-    const navigate = useNavigate();
     const { register, handleSubmit, formState:{ errors } } = useForm({
         resolver: yupResolver(schema)
       });
@@ -51,10 +49,7 @@ const UploadPage = () => {
         });
      } 
 
-    
-    if (!user) {
-        return <Navigate replace to="/profile" />;
-    }
+
     return (
     <>
     <Row>

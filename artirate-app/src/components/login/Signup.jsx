@@ -1,11 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import { useNavigate } from 'react-router-dom';
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth} from "../../constants/firebase.js";
 import { PostUser } from "../../services/userServices.js";
-import { API_UserUrl } from '../../constants/api.js';
 
 const schema = Yup.object().shape({
   username: Yup.string()
@@ -28,6 +28,7 @@ export function Signup() {
     resolver: yupResolver(schema)
   });
   const onSubmit = data => signUpUser(data);
+  const navigate = useNavigate();
 
   const signUpUser = async (data) => {
     try {
@@ -42,11 +43,8 @@ export function Signup() {
       );
       const user = userCredential.user;
 
-      //console.log(user);
-
       PostUser(user.uid, username, user.accessToken);
-
-
+      navigate("/");
       return true
     } catch (error){
       return {error: error.message}

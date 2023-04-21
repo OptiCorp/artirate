@@ -86,6 +86,11 @@ object-fit: cover;
   object-fit: cover;
 }
 
+.card-text {
+  overflow: hidden;
+  max-height: 100px;
+}
+
 
 @keyframes App-logo-spin {
   from {
@@ -96,6 +101,26 @@ object-fit: cover;
   }
 }
 
+@media (max-width: 575px) {
+  .card-text {
+    padding: 4px;
+    min-height: 50px;
+    text-align: start;
+    overflow: hidden;
+    background-color: #080808a8;
+    left:0px;
+    bottom: 0px;
+    position: absolute;
+    width: 100%;
+  }
+  .card-title {
+    overflow: hidden;
+    top:-35px;
+    left:0px;
+    position: absolute;
+    width: 100%;
+  }
+}
 @media (min-width: 575px) {
   .browse-card {
     height: 20vh;

@@ -4,8 +4,6 @@ import axios from "axios";
 import ReactPaginate from 'react-paginate';
 import { Link } from "react-router-dom";
 
-import { GetAllImages } from "../services/imageServices.js";
-
 import { API_ImgUrl } from "../constants/api.js";
 import AuthContext from "../services/AuthContext.js";
 import Login from "../components/login/Login.jsx";
@@ -59,7 +57,7 @@ const Home = () => {
     <Row className="images-container">
     {currentPageData.map(({imgId, imgTitle, imgPrompt, imgUrl, generatorId, imgDescription}) => (
       
-        <Col sm={4} key={imgId} className="pt-3">
+        <Col sm={4} key={imgId} className="pt-3  mt-5 mt-sm-0 mb-5 mb-sm-0">
           <Link to={`/image?id=${imgId}&generator=${generatorId}`}>
         <div className="browse-card card bg-dark text-white" onMouseEnter={(e) => {
                   toggleClassName(imgTitle.replace(/\s/g, ''));
@@ -70,7 +68,7 @@ const Home = () => {
             <img className="browse-img card-img" src={imgUrl} alt={imgDescription} />
             <div className="card-img-overlay browse-layover hide" id={imgTitle.replace(/\s/g, '')}>
               <h5 className="card-title">{imgTitle}</h5>
-              <p className="card-text">{imgPrompt}</p>
+              <p className="card-text align-top">{imgPrompt}</p>
             </div>
           </div></Link>
         </Col>

@@ -29,10 +29,12 @@ uploadTask.on('state_changed',
     switch (snapshot.state) {
         case 'paused':
             console.log('Upload is paused');
-        break;
-      case 'running':
-        console.log('Upload is running');
-        break;
+            break;
+        case 'running':
+            console.log('Upload is running');
+            break;
+        default :
+            console.log('Uploaded')
     }
   }, 
   (error) => {

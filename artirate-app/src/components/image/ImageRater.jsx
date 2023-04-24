@@ -2,7 +2,6 @@ import { useState, useContext, useEffect} from "react";
 import AuthContext from "../../services/AuthContext";
 import { API_RatingUrl, API_UserUrl } from "../../constants/api";
 import { PostRating, EditRating } from "../../services/ratingServices";
-import { useNavigate } from "react-router-dom";
 
 
 const toggleRating= (e) =>{
@@ -105,8 +104,9 @@ function ImageRater(props) {
   const { user } = useContext(AuthContext);
   const [rating, setRating] = useState(0);
   const [apiUser, setApiUser] = useState("");
+
   useEffect(() => {
-    if(props.imgId){
+  if(props.imgId){
     fetch(API_UserUrl)
        .then((response) => response.json())
        .then((data) => {
@@ -122,14 +122,15 @@ function ImageRater(props) {
           console.log(err.message);
        });
     fetch(API_RatingUrl).then((response) => response.json()).then((data) => {
+      setRating(0);
       data.forEach(element => {
         if(element.userId === apiUser && element.imgId === props.imgId){
             setRating(element.ratingValue);
-        }else{
-          setRating(0);
         }
+        
       });
-    })}
+    })
+}
  }, [apiUser, props.imgId, user]);
 
 

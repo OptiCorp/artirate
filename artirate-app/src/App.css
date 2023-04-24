@@ -104,7 +104,28 @@ object-fit: cover;
   filter: brightness(85%);
 }
 
+.ratingValue:hover {
+  cursor: pointer;
+}
 
+.mobile-details-close{
+  font-size: 30pt;
+  position: absolute;
+  right: 15px;
+  top: 80px
+}
+
+.carousel-navigator {
+  height: 20px;
+  width: min-content;
+  opacity: 0.7;
+}
+
+.bi-arrow-right-circle,
+.bi-arrow-left-circle {
+  backdrop-filter: blur(12px) ;
+  text-shadow: 0 0 10px rgb(0, 0, 0);
+}
 
 @keyframes App-logo-spin {
   from {
@@ -134,9 +155,13 @@ object-fit: cover;
     position: absolute;
     width: 100%;
   }
+
+  .browse-img {
+    min-height: 300px;
+    }
 }
 
-@media (min-width: 575px) {
+@media (min-width: 576px) {
   .browse-card {
     height: 20vh;
   }
@@ -148,11 +173,17 @@ object-fit: cover;
   }
 }
 
-@media (min-width: 750px) {
+@media (min-width: 768px) {
   .carousel-img {
     object-fit: cover;
     height: 130px;
     width: 130px;
+  }
+}
+
+@media (min-width: 992px) {
+  .mobile-details-close{
+    display: none;
   }
 }
 
@@ -165,4 +196,7 @@ object-fit: cover;
 }
 
 
-
+.carousel-navigator {
+  height: 20px;
+  width: min-content;
+}

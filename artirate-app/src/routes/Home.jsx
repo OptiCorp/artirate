@@ -26,7 +26,7 @@ const Home = () => {
     if (localStorage.getItem("imagePage")) {
       const page = localStorage.getItem("imagePage");
       setCurrentPage(page);
-      console.log(page);
+      localStorage.clear();
     }
   }, []);
 
@@ -42,6 +42,8 @@ const Home = () => {
   function handlePageClick({ selected: selectedPage }) {
     setCurrentPage(selectedPage);
     localStorage.setItem("imagePage", selectedPage);
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; 
   }
 
   const toggleClassName = (index) => {
@@ -64,7 +66,7 @@ const Home = () => {
     <Row className="images-container">
     {currentPageData.map(({imgId, imgTitle, imgPrompt, imgUrl, generatorId, imgDescription}) => (
       
-        <Col sm={4} key={imgId} className="pt-3  mt-5 mt-sm-0 mb-5 mb-sm-0">
+        <Col  md={4} key={imgId} className="pt-3  mt-5 mt-sm-0 mb-5 mb-sm-0">
           <Link to={`/image?id=${imgId}&generator=${generatorId}`}>
         <div className="browse-card card bg-dark text-white" onMouseEnter={(e) => {
                   toggleClassName(imgTitle.replace(/\s/g, ''));
@@ -82,8 +84,8 @@ const Home = () => {
     ))}
         <Col xs={12} className="mt-3 d-flex justify-content-end  align-self-end">
         <ReactPaginate
-        previousLabel={"Previous"}
-        nextLabel={"Next →"}
+        previousLabel={<i class="bi bi-arrow-left-short"></i>}
+        nextLabel={<i class="bi bi-arrow-right-short"></i>}
         pageCount={pageCount}
         onPageChange={handlePageClick}
         containerClassName={"pagination"}
@@ -93,6 +95,7 @@ const Home = () => {
         disabledClassName={"page-item disabled"}
         activeClassName={"page-item active"}
         forcePage={currentPage}
+        initialSelected={currentPage}
       />
         </Col>
     </Row>

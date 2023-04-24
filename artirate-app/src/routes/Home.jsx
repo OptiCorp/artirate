@@ -16,11 +16,12 @@ const Home = () => {
   const { user } = useContext(AuthContext);
   const [currentPage, setCurrentPage] = useState(0);
   const [images, setImages] = React.useState(null);
-
+  const [filteredImages, setFilteredImages] = useState(images);
 
   React.useEffect(() => {
     axios.get(API_ImgUrl).then((response) => {
-      setImages(response.data.reverse());
+      setImages(response.data);
+      setFilteredImages(response.data.reverse());
       //console.log(response.data);
     });
     if (localStorage.getItem("imagePage")) {
@@ -34,9 +35,9 @@ const Home = () => {
 
   const PER_PAGE = 9;
   const offset = currentPage * PER_PAGE;
-  const currentPageData = images
+  const currentPageData = filteredImages
     .slice(offset, offset + PER_PAGE);
-  const pageCount = Math.ceil(images.length / PER_PAGE);
+  const pageCount = Math.ceil(filteredImages.length / PER_PAGE);
  
 
   function handlePageClick({ selected: selectedPage }) {
@@ -51,16 +52,33 @@ const Home = () => {
     document.querySelector(getElement).classList.toggle("hide");
   }
 
+  const handleSearch = (event) => {
+    let value = event.target.value.toLowerCase();
+    let result = [];
+    result = images.filter((data) => {
+      return (
+        data.imgTitle.toLowerCase().search(value) !== -1 ||
+        data.imgPrompt.toLowerCase().search(value) !== -1 )
+    })
+    setFilteredImages(result);
+  }
+
     if (!user) {
         return <>
         <div><Login /></div>
         </>;
     }
+
     return (
     <>
     <Row>
         <Col>
         <h4 className="text-center">BROWSE</h4>
+        </Col>
+    </Row>
+    <Row>
+        <Col className="d-flex justify-content-end text-end">
+        <input type="search" className="search-input text-end" placeholder="search" onChange={(event) =>handleSearch(event)}/>
         </Col>
     </Row>
     <Row className="images-container">

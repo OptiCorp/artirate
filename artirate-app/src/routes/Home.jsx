@@ -20,7 +20,7 @@ const Home = () => {
 
   React.useEffect(() => {
     axios.get(API_ImgUrl).then((response) => {
-      setImages(response.data);
+      setImages(response.data.reverse());
       //console.log(response.data);
     });
     if (localStorage.getItem("imagePage")) {

@@ -23,6 +23,11 @@ const Home = () => {
       setImages(response.data);
       //console.log(response.data);
     });
+    if (localStorage.getItem("imagePage")) {
+      const page = localStorage.getItem("imagePage");
+      setCurrentPage(page);
+      console.log(page);
+    }
   }, []);
 
   if (!images) return null;
@@ -87,6 +92,7 @@ const Home = () => {
         nextLinkClassName={"page-link"}
         disabledClassName={"page-item disabled"}
         activeClassName={"page-item active"}
+        forcePage={currentPage}
       />
         </Col>
     </Row>

@@ -18,9 +18,9 @@ const Image = () => {
     const [previous, setPrevious] = useState(false);
     const [next, setNext] = useState(false);
 
-    const query = new URLSearchParams(useLocation().search);
-    const id = query.get("id");
-    const genId = query.get("generator");
+    let query = new URLSearchParams(useLocation().search);
+    let id = query.get("id");
+    let genId = query.get("generator");
 
     const carouselImages = document.querySelectorAll(".carousel-img");
 
@@ -42,6 +42,8 @@ const Image = () => {
           carouselImages.forEach(element => {
             element.onclick = (e) => {
                 setTimeout(() => {
+                    id = query.get("id");
+                    genId = query.get("generator");
                     fetch();
                   }, "1");
             }

@@ -13,12 +13,12 @@ Explore the fascinating world of generative art
 
 To use ArtiRate, you will need to have Node and .Net installed on your computer. Follow these steps to get started:
 
-1.Clone this repository
-2.[Insert additional installation instructions here, such as running a server or installing dependencies]
+1. Clone this repository
+2. [Insert additional installation instructions here, such as running a server or installing dependencies]
 
 ## Usage
 
-To use ArtiRate, simply [url]. You can then begin uploading and rating AI-generated images, as well as exploring the platform to discover new forms of generative art.
+To use ArtiRate, simply go to [url]. You can then begin uploading and rating AI-generated images, as well as exploring the platform to discover new forms of generative art.
 
 ## Contributing
 

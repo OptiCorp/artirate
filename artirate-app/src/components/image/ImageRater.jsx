@@ -105,8 +105,6 @@ function ImageRater(props) {
   const { user } = useContext(AuthContext);
   const [rating, setRating] = useState(0);
   const [apiUser, setApiUser] = useState("");
-  const navigate = useNavigate();
-
   useEffect(() => {
     if(props.imgId){
     fetch(API_UserUrl)
@@ -127,6 +125,8 @@ function ImageRater(props) {
       data.forEach(element => {
         if(element.userId === apiUser && element.imgId === props.imgId){
             setRating(element.ratingValue);
+        }else{
+          setRating(0);
         }
       });
     })}

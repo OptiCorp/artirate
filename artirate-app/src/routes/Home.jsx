@@ -10,7 +10,6 @@ import Login from "../components/login/Login.jsx";
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { setSyntheticLeadingComments } from "typescript";
 
 
 const Home = () => {
@@ -25,11 +24,6 @@ const Home = () => {
       setFilteredImages(response.data.reverse());
       //console.log(response.data);
     });
-    if (localStorage.getItem("imagePage")) {
-      const page = localStorage.getItem("imagePage");
-      setCurrentPage(page);
-      localStorage.clear();
-    }
   }, []);
 
   if (!images) return null;
@@ -43,7 +37,6 @@ const Home = () => {
 
   function handlePageClick({ selected: selectedPage }) {
     setCurrentPage(selectedPage);
-    localStorage.setItem("imagePage", selectedPage);
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; 
   }
@@ -74,18 +67,18 @@ const Home = () => {
     <>
     <Row>
         <Col>
-        <h4 className="text-center">BROWSE</h4>
+        <h4 className="text-center mb-0 pb-0">BROWSE</h4>
         </Col>
     </Row>
     <Row>
-        <Col className="d-flex justify-content-end">
+        <Col className="d-flex justify-content-end mt">
         <input type="search" className="search-input text-end" placeholder="search" onChange={(event) =>handleSearch(event)}/>
         </Col>
     </Row>
-    <Row className="images-container">
+    <Row className="images-container mb-0">
     {currentPageData.map(({imgId, imgTitle, imgPrompt, imgUrl, generatorId, imgDescription}) => (
       
-        <Col  md={4} key={imgId} className="pt-3  mt-5 mt-sm-0 mb-5 mb-sm-0">
+        <Col sm={4} key={imgId} className="pt-3  mt-5 mt-sm-0 mb-5 mb-sm-0">
           <Link to={`/image?id=${imgId}&generator=${generatorId}`}>
         <div className="browse-card card bg-dark text-white" onMouseEnter={(e) => {
                   toggleClassName(imgTitle.replace(/\s/g, ''));
@@ -101,7 +94,7 @@ const Home = () => {
           </div></Link>
         </Col>
     ))}
-        <Col xs={12} className="mt-3 d-flex justify-content-end  align-self-end">
+        <Col xs={12} className="d-flex justify-content-end  align-self-end mt-0 pt-0">
         <ReactPaginate
         previousLabel={<i className="bi bi-arrow-left-short"></i>}
         nextLabel={<i className="bi bi-arrow-right-short"></i>}

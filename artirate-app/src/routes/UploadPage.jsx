@@ -45,7 +45,8 @@ const UploadPage = () => {
         uploadToCloud(file).then((imgUrl)=> {
            //console.log(data);
            //console.log(imgUrl);
-           PostImage(imgUrl, data, user)
+           PostImage(imgUrl, data, user);
+           window.alert("Image uploaded!");
         });
      } 
 
@@ -57,11 +58,10 @@ const UploadPage = () => {
         <h4 className="text-center">UPLOAD</h4>
         </Col>
     </Row>
-    <Row className="justify-content-center">
-        
         {user? 
         (<>
-            <Col>
+        <Row className="justify-content-center">
+            <Col sm={8} md={6} className="px-5 px-md-1 p-1">
                 <form id="upload-form" className="w-100" onSubmit={handleSubmit(onSubmit)}>
                     <div className="upload-box w-100 mb-2 d-flex justify-content-center align-items-center">
                        <img src="https://bootstrapious.com/i/snippets/sn-img-upload/image.svg" alt="" className="mb-4 upload-icon" />
@@ -83,17 +83,19 @@ const UploadPage = () => {
                     <p>{errors.prompt?.message}</p>
                 </form>
             </Col>
-            <Col xs={12}>
+        </Row>
+        <Row className="justify-content-center">
+            <Col sm={8} md={6}  className="px-5 px-md-1 p-1">
                 <div className="d-flex justify-content-end mt-3">
                     <button type="button" className="btn btn-secondary" form="upload-form" onClick={clearForm()}>Cancel</button>
                     <button type="submit" className="btn btn-primary ms-1" form="upload-form">Upload</button>
                 </div>
             </Col>
+        </Row>
         </>) : 
         (<>
             <Col xs={12} className="text-center mt-5">Log in or Sign Up to upload Images ;)</Col>
         </>)}
-    </Row>
     </>
     );
 };

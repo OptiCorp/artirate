@@ -26,6 +26,7 @@
   margin-top: 100px;
   height: 100%;
   flex: auto;
+  max-width: 540px;
 }
 
 .App-link {
@@ -42,15 +43,17 @@
   border: 3px solid white;
   border-radius: .375rem;
   max-height: 400px;
-  min-height:300px;
+  min-height:200px;
   position: relative;
 }
 #upload {
   position: absolute;
-  bottom: 0px;
+  bottom: -2px;
+  border: none;
+  border-radius: 0rem 0rem .350rem .350rem;
 }
 .upload-icon {
-  width: 150px;
+  width: 100px;
   position: absolute;
   left: auto;
   right: auto;
@@ -153,6 +156,15 @@ object-fit: cover;
   border-radius: 0.375rem;
 }
 
+.pagination {
+  margin-bottom: 8px;
+}
+.page-link,
+.page-link.disabled,
+.disabled>.page-link {
+  background-color: transparent;
+  padding: 2px 5px;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -181,15 +193,25 @@ object-fit: cover;
     position: absolute;
     width: 100%;
   }
-
   .browse-img {
     min-height: 300px;
-    }
+  }
+}
+@media (max-width: 768px) {
+  .image-main {
+    width: 100%;
+    max-height: 50vh;
+  }
+
 }
 
 @media (min-width: 576px) {
+
   .browse-card {
     height: 20vh;
+  }
+  .card-title {
+    font-size: 9pt;
   }
   .browse-layover {
     backdrop-filter: brightness(50%);
@@ -197,13 +219,24 @@ object-fit: cover;
   .hide {
     display: none;
   }
+
+  .search-input {
+    margin-top: -23px;
+  }
 }
 
 @media (min-width: 768px) {
+  
+  .App-content {
+    max-width: 720px;
+  }
   .carousel-img {
     object-fit: cover;
     height: 130px;
     width: 130px;
+  }
+  .upload-box {
+    min-height:300px;
   }
 }
 

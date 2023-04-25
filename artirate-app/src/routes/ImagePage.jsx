@@ -79,7 +79,7 @@ const Image = () => {
         </Col>
     </Row>
     <Row className="justify-content-center align-items-center position-relative">
-        <Col xs={12}  lg={8} xl={6}>
+        <Col xs={12} md={8} xl={6}>
         <a href={image.imgUrl}><img className="image-main" src={image.imgUrl} alt={image.imgDescription} /></a>
         </Col>
         { next?
@@ -92,7 +92,7 @@ const Image = () => {
             </Link>) : (<></>)}
     </Row>
     <Row className="justify-content-center">
-        <Col xs={12} lg={8} xl={6} className="position-relative">
+        <Col  xs={12}  md={8} xl={6} className="position-relative">
             <ImageRating imgId={image.imgId}/>
             <div className="position-absolute top-0">
                 <small><strong>Generator: </strong></small>

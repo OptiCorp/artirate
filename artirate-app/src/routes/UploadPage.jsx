@@ -59,36 +59,39 @@ const UploadPage = () => {
     </Row>
     <Row className="justify-content-center">
         
-        {user? (<>
+        {user? 
+        (<>
             <Col>
-          <form id="upload-form" className="w-100" onSubmit={handleSubmit(onSubmit)}>
-            <div className="upload-box w-100 mb-2 d-flex justify-content-center align-items-center">
-               <img src="https://bootstrapious.com/i/snippets/sn-img-upload/image.svg" alt="" className="mb-4 upload-icon" />
-               <input className="form-control" type="file" id="upload" {...register("upload") }/>
-               <p>{errors.upload?.message}</p>
-            </div>
-            <label className="form-label">Title</label>
-            <input type="text" className="form-control" {...register("title")} />
-            <p>{errors.title?.message}</p>
-            <input type="hidden" className="form-control" value="No description" {...register("description")} />
-            <p>{errors.description?.message}</p>
-            <label className="form-label">Generator</label>
-            <select type="text" className="form-select" {...register("generator")} >
-                <GeneratorOptions />
-            </select>
-            <p>{errors.generator?.message}</p>
-            <label className="form-label">Prompt</label>
-            <textarea type="text" className="form-control" {...register("prompt")} rows="3"></textarea>
-            <p>{errors.prompt?.message}</p>
-          </form>
-        </Col>
-        <Col xs={12}>
-            <div className="d-flex justify-content-end mt-3">
-                <button type="button" className="btn btn-secondary" form="upload-form" onClick={clearForm()}>Cancel</button>
-                <button type="submit" className="btn btn-primary ms-1" form="upload-form">Upload</button>
-            </div>
-        </Col>
-        </>) : (<><div>Log in or Sign Up to upload Images ;) </div>
+                <form id="upload-form" className="w-100" onSubmit={handleSubmit(onSubmit)}>
+                    <div className="upload-box w-100 mb-2 d-flex justify-content-center align-items-center">
+                       <img src="https://bootstrapious.com/i/snippets/sn-img-upload/image.svg" alt="" className="mb-4 upload-icon" />
+                       <input className="form-control" type="file" id="upload" {...register("upload") }/>
+                       <p>{errors.upload?.message}</p>
+                    </div>
+                    <label className="form-label">Title</label>
+                    <input type="text" className="form-control" {...register("title")} />
+                    <p>{errors.title?.message}</p>
+                    <input type="hidden" className="form-control" value="No description" {...register("description")} />
+                    <p>{errors.description?.message}</p>
+                    <label className="form-label">Generator</label>
+                    <select type="text" className="form-select" {...register("generator")} >
+                        <GeneratorOptions />
+                    </select>
+                    <p>{errors.generator?.message}</p>
+                    <label className="form-label">Prompt</label>
+                    <textarea type="text" className="form-control" {...register("prompt")} rows="3"></textarea>
+                    <p>{errors.prompt?.message}</p>
+                </form>
+            </Col>
+            <Col xs={12}>
+                <div className="d-flex justify-content-end mt-3">
+                    <button type="button" className="btn btn-secondary" form="upload-form" onClick={clearForm()}>Cancel</button>
+                    <button type="submit" className="btn btn-primary ms-1" form="upload-form">Upload</button>
+                </div>
+            </Col>
+        </>) : 
+        (<>
+            <Col xs={12} className="text-center mt-5">Log in or Sign Up to upload Images ;)</Col>
         </>)}
     </Row>
     </>

@@ -17,7 +17,6 @@ builder.Services.AddDbContext<ArtirateContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("ArtiRateConnection"));
 });
 
-
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(opt =>
     {
@@ -31,7 +30,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateLifetime = true
         };
     });
-
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, redirect } from "react-router-dom";
 
 import { API_GeneratorUrl, API_ImgUrl} from "../constants/api.js";
 import { Row, Col } from "react-bootstrap";
@@ -32,7 +32,7 @@ const Image = () => {
                 const responses = await axios.all([getImg, getGenerator, getAllImages])
                 setImage(responses[0].data);
                 setGenerator(responses[1].data);
-                setAllImages(responses[2].data)
+                setAllImages(responses[2].data.reverse())
 
                 if(allImages.length > 0){
                     allImages.forEach((element, index) => {
@@ -71,7 +71,7 @@ const Image = () => {
 
     return (
     <>
-    <i className="bi bi-x mobile-details-close" onClick={() => navigate(-1)}></i>
+    <i className="bi bi-x mobile-details-close" onClick={() => navigate("/")}></i>
     <Row className="justify-content-center mt-3">
         <Col className="text-center" xs={12}   xl={8}>
             <h3>{image.imgTitle}</h3>

@@ -6,6 +6,7 @@ import { signInWithEmailAndPassword} from "firebase/auth";
 import { auth } from "../../constants/firebase.js";
 import Signup from './Signup.jsx';
 import { useNavigate } from "react-router-dom";
+import { Row, Col } from 'react-bootstrap';
 
 
 
@@ -53,28 +54,32 @@ function Login() {
   return (
     <>
     {!togglePage ? (
-      <div className="login-container">
-      <h6>Sign In</h6>
-      {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
-      <form onSubmit={handleSubmit(onSubmit)}>
-
-        {/* register your input into the hook by invoking the "register" function */}
-        <label className="label">Email</label>
-        <input className="form-control" {...register("email")} />
-        {/* errors will return when field validation fails  */}
-        <p>{errors.email?.message}</p>
-
-        <label className="label">Password</label>
-        <input className="form-control" type="password" {...register("password")} />
-        <p>{errors.password?.message}</p>
-
-        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-          <input className="btn btn-primary" type="submit" />
-        </div>
-        
-      </form>
-      <div className="signup-btn d-flex w-100 justify-content-end text-end pt-2" onClick={toggleSignUp}><p>Sign Up!</p></div>
-    </div>
+      <Row className="justify-content-center">
+        <Col xs={12} className="text-center pb-3">
+          <h4>LOGIN</h4>
+        </Col>
+        <Col sm={8} md={6}>
+          {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
+          <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
+  
+            {/* register your input into the hook by invoking the "register" function */}
+            <label className="label">Email</label>
+            <input className="form-control" {...register("email")} />
+            {/* errors will return when field validation fails  */}
+            <p>{errors.email?.message}</p>
+  
+            <label className="label">Password</label>
+            <input className="form-control" type="password" {...register("password")} />
+            <p>{errors.password?.message}</p>
+  
+            <div className="d-grid gap-2 d-sm-flex justify-content-sm-end">
+              <input className="btn btn-primary mt-3 mt-md-0" type="submit" />
+            </div>
+          
+          </form>
+         <div className="signup-btn d-flex w-100 justify-content-end text-end pt-2" onClick={toggleSignUp}><p>Sign Up!</p></div>
+        </Col>
+    </Row>
     ) : (
       <Signup />
     )}

@@ -10,6 +10,7 @@ import Login from "../components/login/Login.jsx";
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { setSyntheticLeadingComments } from "typescript";
 
 
 const Home = () => {
@@ -77,7 +78,7 @@ const Home = () => {
         </Col>
     </Row>
     <Row>
-        <Col className="d-flex justify-content-end text-end">
+        <Col className="d-flex justify-content-end">
         <input type="search" className="search-input text-end" placeholder="search" onChange={(event) =>handleSearch(event)}/>
         </Col>
     </Row>
@@ -102,8 +103,8 @@ const Home = () => {
     ))}
         <Col xs={12} className="mt-3 d-flex justify-content-end  align-self-end">
         <ReactPaginate
-        previousLabel={<i class="bi bi-arrow-left-short"></i>}
-        nextLabel={<i class="bi bi-arrow-right-short"></i>}
+        previousLabel={<i className="bi bi-arrow-left-short"></i>}
+        nextLabel={<i className="bi bi-arrow-right-short"></i>}
         pageCount={pageCount}
         onPageChange={handlePageClick}
         containerClassName={"pagination"}

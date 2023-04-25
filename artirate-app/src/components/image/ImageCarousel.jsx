@@ -47,7 +47,7 @@ function ImageCarousel(props) {
                         carouselImages.push(element);
                     }
             });
-            setImages(carouselImages);
+            setImages(carouselImages.reverse());
         })
         .catch((err) => {
             console.log(err.message);

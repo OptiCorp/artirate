@@ -42,7 +42,9 @@ function Login() {
 
       return true
     } catch (error) {
-      return {error: error.message}
+      const errorContainer = document.querySelector(".login-error")
+      errorContainer.innerHTML = "wrong username or password"
+      console.log("error: " + error.message)
     }
   };
 
@@ -75,6 +77,8 @@ function Login() {
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-end">
               <input className="btn btn-primary mt-3 mt-md-0" type="submit" />
             </div>
+
+            <div className="login-error text-end text-danger pt-1"></div>
           
           </form>
          <div className="signup-btn d-flex w-100 justify-content-end text-end pt-2" onClick={toggleSignUp}><p>Sign Up!</p></div>

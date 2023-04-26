@@ -8,5 +8,4 @@ public partial class RatingDTO
     public int RatingValue { get; set; }
 
     public int ImgId { get; set; }
-
 }

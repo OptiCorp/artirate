@@ -12,10 +12,7 @@ builder.Services.AddControllers();
 var connectionString = builder.Configuration["Db:ConnectionString"];
 var JwtIssuer = builder.Configuration["Jwt:Issuer"];
 
-builder.Services.AddDbContext<ArtirateContext>(options =>
-{
-	options.UseSqlServer(builder.Configuration.GetConnectionString("ArtiRateConnection"));
-});
+builder.Services.AddDbContext<ArtirateContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ArtiRateConnection")));
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(opt =>

@@ -10,6 +10,7 @@ import Login from "../../components/login/Login.jsx";
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import ImageCard from "./components/ImageCard.jsx";
 
 
 const Home = () => {
@@ -39,11 +40,6 @@ const Home = () => {
     setCurrentPage(selectedPage);
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; 
-  }
-
-  const toggleClassName = (index) => {
-    const getElement = "#" + index;
-    document.querySelector(getElement).classList.toggle("hide");
   }
 
   const handleSearch = (event) => {
@@ -77,24 +73,13 @@ const Home = () => {
     </Row>
     <Row className="images-container mb-0 pb-0">
     {currentPageData.map(({imgId, imgTitle, imgPrompt, imgUrl, generatorId, imgDescription}) => (
-      
-        <Col sm={4} key={imgId} className="pt-3 mt-5 mt-sm-0 mb-0 pb-0">
-          <Link to={`/image?id=${imgId}&generator=${generatorId}`}>
-        <div className="browse-card card bg-dark text-white" onMouseEnter={(e) => {
-                  toggleClassName(imgTitle.replace(/\s/g, ''));
-                 }}
-                 onMouseLeave={e => {
-                  toggleClassName(imgTitle.replace(/\s/g, ''));
-                 }}>
-            <img className="browse-img card-img" src={imgUrl} alt={imgDescription} />
-            <div className="card-img-overlay browse-layover hide" id={imgTitle.replace(/\s/g, '')}>
-              <h5 className="card-title">{imgTitle}</h5>
-              <p className="card-text align-top">{imgPrompt}</p>
-            </div>
-          </div></Link>
-        </Col>
+      <Col sm={4} key={imgId} className="pt-3 mt-5 mt-sm-0 mb-0 pb-0">
+        <Link to={`/image?id=${imgId}&generator=${generatorId}`}>
+          <ImageCard title={imgTitle} description={imgDescription} url={imgUrl} prompt={imgPrompt}/>
+        </Link>
+      </Col>
     ))}
-        <Col xs={12} className="d-flex justify-content-end  align-self-end mt-n1 pt-0">
+      <Col xs={12} className="d-flex justify-content-end  align-self-end mt-n1 pt-0">
         <ReactPaginate
         previousLabel={<i className="bi bi-arrow-left-short"></i>}
         nextLabel={<i className="bi bi-arrow-right-short"></i>}
@@ -106,10 +91,8 @@ const Home = () => {
         nextLinkClassName={"page-link"}
         disabledClassName={"page-item disabled"}
         activeClassName={"page-item active"}
-        forcePage={currentPage}
-        initialSelected={currentPage}
       />
-        </Col>
+      </Col>
     </Row>
     </>
     );

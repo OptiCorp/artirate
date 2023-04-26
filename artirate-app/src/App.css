@@ -81,6 +81,7 @@ object-fit: cover;
   height: 100%;
   min-height: 83vh;
   position: relative;
+  margin-bottom: 0px;
 }
 
 .image-main {
@@ -92,7 +93,7 @@ object-fit: cover;
 
 .card-text {
   overflow: hidden;
-  max-height: 100px;
+  max-height: 55px;
 }
 
 .carousel-img {
@@ -157,8 +158,9 @@ object-fit: cover;
 }
 
 .pagination {
-  margin-bottom: 8px;
+  margin-top: -15px;
 }
+
 .page-link,
 .page-link.disabled,
 .disabled>.page-link {
@@ -211,6 +213,9 @@ object-fit: cover;
     height: 20vh;
   }
   .card-title {
+    font-size: 9pt;
+  }
+  .card-text{
     font-size: 9pt;
   }
   .browse-layover {

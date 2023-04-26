@@ -1,8 +1,8 @@
 import React, {useState, useEffect}from 'react';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { API_ImgUrl } from '../../constants/api';
-import AuthContext from '../../services/AuthContext';
+import { API_ImgUrl } from '../../../constants/api';
+import AuthContext from '../../../services/AuthContext';
 import { Row, Col } from 'react-bootstrap';
 
 function ImageCarousel(props) {

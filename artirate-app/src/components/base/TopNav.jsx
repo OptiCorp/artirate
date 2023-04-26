@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
 import AuthContext from "../../services/AuthContext.js";
 
 import Nav from 'react-bootstrap/Nav';
@@ -12,16 +11,15 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 function TopNav(props) {
   const { user } = useContext(AuthContext);
-  const navigate = useNavigate();
 
 
   return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar bg="dark" variant="dark" className="py-0">
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand><h1>ArtiRate</h1></Navbar.Brand>
+            <Navbar.Brand><h2>ArtiRate</h2></Navbar.Brand>
           </LinkContainer>
-          <Nav className="me-auto justify-content-end flex-grow-1 align-items-center">
+          <Nav className="me-auto my-0 justify-content-end flex-grow-1 align-items-center">
             <LinkContainer to="/upload">
               <Nav.Link>
                 <Button variant="outline-light">Upload</Button>

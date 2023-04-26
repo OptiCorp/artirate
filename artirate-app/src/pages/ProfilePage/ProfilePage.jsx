@@ -1,8 +1,8 @@
 import { useContext, useState, useEffect } from "react";
-import AuthContext from "../services/AuthContext.js";
-import { API_UserUrl } from "../constants/api.js";
-import { logOut } from "../services/loginServices.js";
-import  Login  from "../components/login/Login.jsx"
+import AuthContext from "../../services/AuthContext.js";
+import { API_UserUrl } from "../../constants/api.js";
+import { logOut } from "../../services/loginServices.js";
+import  Login  from "../../components/login/Login.jsx"
 import { Row, Col } from "react-bootstrap";
 
 import Button from 'react-bootstrap/Button';

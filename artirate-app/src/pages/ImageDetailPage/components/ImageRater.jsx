@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect} from "react";
-import AuthContext from "../../services/AuthContext";
-import { API_RatingUrl, API_UserUrl } from "../../constants/api";
-import { PostRating, EditRating } from "../../services/ratingServices";
+import AuthContext from "../../../services/AuthContext";
+import { API_RatingUrl, API_UserUrl } from "../../../constants/api";
+import { PostRating, EditRating } from "../../../services/ratingServices";
 
 
 const toggleRating= (e) =>{

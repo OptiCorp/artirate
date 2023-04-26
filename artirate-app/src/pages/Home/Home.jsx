@@ -4,9 +4,9 @@ import axios from "axios";
 import ReactPaginate from 'react-paginate';
 import { Link } from "react-router-dom";
 
-import { API_ImgUrl } from "../constants/api.js";
-import AuthContext from "../services/AuthContext.js";
-import Login from "../components/login/Login.jsx";
+import { API_ImgUrl } from "../../constants/api.js";
+import AuthContext from "../../services/AuthContext.js";
+import Login from "../../components/login/Login.jsx";
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -70,15 +70,15 @@ const Home = () => {
         <h4 className="text-center mb-0 pb-0">BROWSE</h4>
         </Col>
     </Row>
-    <Row>
+    <Row className="mb-0">
         <Col className="d-flex justify-content-end mt">
         <input type="search" className="search-input text-end" placeholder="search" onChange={(event) =>handleSearch(event)}/>
         </Col>
     </Row>
-    <Row className="images-container mb-0">
+    <Row className="images-container mb-0 pb-0">
     {currentPageData.map(({imgId, imgTitle, imgPrompt, imgUrl, generatorId, imgDescription}) => (
       
-        <Col sm={4} key={imgId} className="pt-3  mt-5 mt-sm-0 mb-5 mb-sm-0">
+        <Col sm={4} key={imgId} className="pt-3 mt-5 mt-sm-0 mb-0 pb-0">
           <Link to={`/image?id=${imgId}&generator=${generatorId}`}>
         <div className="browse-card card bg-dark text-white" onMouseEnter={(e) => {
                   toggleClassName(imgTitle.replace(/\s/g, ''));
@@ -94,7 +94,7 @@ const Home = () => {
           </div></Link>
         </Col>
     ))}
-        <Col xs={12} className="d-flex justify-content-end  align-self-end mt-0 pt-0">
+        <Col xs={12} className="d-flex justify-content-end  align-self-end mt-n1 pt-0">
         <ReactPaginate
         previousLabel={<i className="bi bi-arrow-left-short"></i>}
         nextLabel={<i className="bi bi-arrow-right-short"></i>}

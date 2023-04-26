@@ -33,7 +33,7 @@ namespace ArtiRateAPI.Controllers
 
         // GET: api/User/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<User>> GetUserById(int id)
         {
           if (_context.Users == null)
           {
@@ -41,14 +41,22 @@ namespace ArtiRateAPI.Controllers
           }
             var user = await _context.Users.FindAsync(id);
 
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return user;
+            return user ?? (ActionResult<User>)NotFound();
         }
+/*
+         // GET: api/User/Firebase/1
+        [HttpGet("/Firebase/{link}")]
+        public async Task<ActionResult<User>> GetUserByLink(string FirebaseLink)
+        {
+          if (_context.Users == null)
+          {
+              return NotFound();
+          }+
+            var user = await _context.Users.FindAsync(FirebaseLink);
 
+            return user ?? (ActionResult<User>)NotFound();
+        }
+*/
         // PUT: api/User/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -65,23 +73,16 @@ namespace ArtiRateAPI.Controllers
             {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException) when (!UserExists(id))
             {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound();
             }
 
             return NoContent();
         }
 
         // POST: api/User
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // To protect from over posting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {

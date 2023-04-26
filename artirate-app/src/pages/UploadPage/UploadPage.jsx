@@ -1,13 +1,13 @@
 import { useContext } from "react";
-import AuthContext from "../services/AuthContext.js"
+import AuthContext from "../../services/AuthContext.js"
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import { uploadToCloud } from "../services/uploadServices.js";
-import { PostImage } from "../services/imageServices.js";
-import GeneratorOptions from "../components/upload/GeneratorOptions.jsx";
+import { uploadToCloud } from "../../services/uploadServices.js";
+import { PostImage } from "../../services/imageServices.js";
+import GeneratorOptions from "./components/GeneratorOptions.jsx";
 
 const schema = Yup.object().shape({
     upload: Yup.mixed()

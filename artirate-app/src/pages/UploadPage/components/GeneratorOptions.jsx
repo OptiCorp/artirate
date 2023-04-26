@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { API_GeneratorUrl } from '../../constants/api';
+import { API_GeneratorUrl } from '../../../constants/api';
 
 export function GeneratorOptions(props) {
   const [generators, setGenerators] = useState(null);

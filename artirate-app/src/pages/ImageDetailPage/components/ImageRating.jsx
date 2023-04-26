@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import axios from 'axios';
-import { API_RatingUrl } from '../../constants/api';
+import { API_RatingUrl } from '../../../constants/api';
 
 const getStars = (rating) => {
     switch(rating) {

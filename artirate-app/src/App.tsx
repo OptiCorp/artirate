@@ -6,10 +6,10 @@ import { Routes, Route } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 
 import TopNav from './components/base/TopNav';
-import Home from './routes/Home';
-import ProfilePage from './routes/ProfilePage';
-import UploadPage from './routes/UploadPage';
-import ImagePage from './routes/ImagePage';
+import Home from './pages/Home/Home';
+import ProfilePage from './pages/ProfilePage/ProfilePage';
+import UploadPage from './pages/UploadPage/UploadPage';
+import ImagePage from './pages/ImageDetailPage/ImagePage';
 
 
 

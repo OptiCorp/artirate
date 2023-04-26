@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import { Link, useNavigate, redirect } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 
-import { API_GeneratorUrl, API_ImgUrl} from "../constants/api.js";
+import { API_GeneratorUrl, API_ImgUrl} from "../../constants/api.js";
 import { Row, Col } from "react-bootstrap";
-import ImageRater from "../components/image/ImageRater.jsx";
-import ImageRating from "../components/image/ImageRating.jsx";
-import ImageCarousel from "../components/image/ImageCarousel.jsx";
+import ImageRater from "./components/ImageRater.jsx";
+import ImageRating from "./components/ImageRating.jsx";
+import ImageCarousel from "./components/ImageCarousel.jsx";
 
 const Image = () => {
     const [image, setImage] = useState({});
@@ -72,14 +72,14 @@ const Image = () => {
     return (
     <>
     <i className="bi bi-x mobile-details-close" onClick={() => navigate("/")}></i>
-    <Row className="justify-content-center mt-3">
-        <Col className="text-center" xs={12}   xl={8}>
-            <h3>{image.imgTitle}</h3>
-            <p>{image.imgPrompt}</p>
+    <Row className="justify-content-center mt-2">
+        <Col className="text-center pb-1" xs={12}   xl={8}>
+            <h4>{image.imgTitle}</h4>
+            <small className="pb-2">{image.imgPrompt}</small>
         </Col>
     </Row>
     <Row className="justify-content-center align-items-center position-relative">
-        <Col xs={12} md={8} xl={6}>
+        <Col xs={12} md={6} lg={6}>
         <a href={image.imgUrl}><img className="image-main" src={image.imgUrl} alt={image.imgDescription} /></a>
         </Col>
         { next?
@@ -92,7 +92,7 @@ const Image = () => {
             </Link>) : (<></>)}
     </Row>
     <Row className="justify-content-center">
-        <Col  xs={12}  md={8} xl={6} className="position-relative">
+        <Col  xs={12}  md={6} lg={6} className="position-relative">
             <ImageRating imgId={image.imgId}/>
             <div className="position-absolute top-0">
                 <small><strong>Generator: </strong></small>

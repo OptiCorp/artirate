@@ -8,7 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./services/AuthProvider.js";
 
 import Login from "./components/login/Login.jsx";
-import Profile from "./routes/ProfilePage.jsx";
+import Profile from "./pages/ProfilePage/ProfilePage.jsx";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
